@@ -13,7 +13,10 @@ function App() {
     useState<ConnectionState>("connecting");
 
   useEffect(() => {
-    const eventSource = new EventSource("http://localhost:3000/sse-stream");
+    const eventSource = new EventSource(
+      import.meta.env.VITE_BACKEND_URL + "/sse-stream" ||
+        "http://localhost:3000/sse-stream"
+    );
 
     let reconnectTimeout: null | number = null;
     let hasConnectedOnce = false; // track first successful connection
